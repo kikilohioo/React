@@ -2,7 +2,7 @@
 
 const persona = {
 	nombre: "Caiqui",
-	edad: 22,
+	edad: 23,
 	clave: "Kiki",
 	rango: "Junior"
 }
@@ -26,8 +26,12 @@ const useContext = ({ clave, nombre, edad, rango = "Trainee"/* Sirve como valor 
 };
 
 //extracción de objetos, objetos anidados y desestructuración
-const { nombreClave, anios, talla:{ estatura, peso } } = useContext(persona);
-console.log(nombreClave, anios, estatura, peso);
+const { nombreClave, anios, talla: { estatura, peso } } = useContext(persona);
+
+export function getPersonaEdad(anios = 22) {
+	return anios;
+}
+// console.log(nombreClave, anios, estatura, peso);
 
 
 
