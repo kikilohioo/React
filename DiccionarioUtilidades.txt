@@ -7,21 +7,25 @@
 
 
 
------------------React
+-------------------------React
 
-----------Components
+---------------Components
+
+----------Hooks
+
+-No se deben agregar hooks de forma condicional, por lo que deberemos agregarlos lo más arriba posible en el componente
 
 ----useEffect
 
 -Se recomienda usar un 'useEffect' por cada cosa que quieramos saber si cambia o no
 
-----useState(hooks)
+----useState
 
 -Siempre revisar si es necesario desestrucutar un state para acceder de forma más sencilla a los atributos
 
--Cuando vamos a setear los valores de los hooks tambien hay que desestructurar si es necesario
+-Cuando vamos a setear los valores de los hooks(useState) tambien hay que desestructurar si es necesario
 
--No se deben agregar hooks de forma condicional, por lo que deberemos agregarlos lo más arriba posible en el componente
+
 
 
 
