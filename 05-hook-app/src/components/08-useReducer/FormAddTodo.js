@@ -1,5 +1,5 @@
 import React from 'react'
-import { useForm } from '../../hooks/useForm'
+import { useForm } from '../../hooks/useForm/useForm'
 
 export const FormAddTodo = ({ handleAdd, todos }) => {
 	const [{ desc }, handleInputChange, reset] = useForm({
