@@ -1,0 +1,17 @@
+body{
+	padding: 70px;
+}
+
+.list-group-item{
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+}
+
+.item-desc{
+	cursor: pointer;
+}
+
+.complete{
+	text-decoration: line-through;
+}
