@@ -1,8 +1,9 @@
 # React
 
 ## Components
+...
 
-### Hooks
+##  Hooks
 - No se deben agregar hooks de forma condicional, por lo que deberemos agregarlos lo más arriba posible en el componente
 
 #### useEffect
@@ -25,14 +26,15 @@
 - Se usa para reunir varios componentes y proveerles una forma directa de acceso a la información de un padre
 - Todos los componentes en los que se quiera usar el useContext deben estar dentro del componente del context
 
+#### useMemo
+- Se usa para memorizar algo y desencadenar una función si una dependencia cambia
 
-
-
-
-
-
-
-
-
-
-
+## Navigation
+#### useNavigate
+- Hook para navegacion
+```
+const navigate = useNavigate();
+navigate('url',{
+	configs...
+})
+```
