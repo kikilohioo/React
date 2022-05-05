@@ -1,4 +1,6 @@
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { heroeImages } from '../../helpers/heroImages'
+
 
 export const HeroCard = ({ id, superhero, publisher, alter_ego, first_appearance, characters }) => {
 	return (
@@ -6,7 +8,11 @@ export const HeroCard = ({ id, superhero, publisher, alter_ego, first_appearance
 			<div className={'card'}>
 				<div className="row no-gutters">
 					<div className="col-4">
-						<img src={`/assets/${id}.jpg`} className="card-img" alt={ superhero } />
+						<img
+							src={heroeImages(`./${id}.jpg`)}
+							className="card-img"
+							alt={superhero}
+						/>
 					</div>
 					<div className="col-8">
 						<div className="card-body">
