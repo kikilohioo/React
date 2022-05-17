@@ -9,7 +9,7 @@ export const Sidebar = () => {
 					<i className='fa fa-moon'></i>
 					<span>Caiqui</span>
 				</h3>
-				<button className='btn'>
+				<button className='btn journal__logout-btn'>
 					<i className='fa fa-sign-out'></i>
 				</button>
 			</div>

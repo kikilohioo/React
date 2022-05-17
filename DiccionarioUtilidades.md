@@ -19,6 +19,7 @@
 - En lugar de usar setState(state+1) usaremos setState(s => s + 1) para utilizar un duplicado
 
 #### useReducer
+Comando Instalacion ```npm install --save reducer```
 - Se usa de forma similar al useState pero es conveniente para casos más complejos
 - Separa la logica en acciones enviadas a traves del dispatch, resuelve todo dentro de la funcion y siempre retorna solo un estado
 
@@ -37,4 +38,27 @@ const navigate = useNavigate();
 navigate('url',{
 	configs...
 })
+```
+## Redux
+Comando instalacion ```npm i react-redux redux```
+- Es una forma de trabajar, un patron de trabajo, el patron Redux
+- Es una forma de controlar donde se encuentra la información de nuestra aplicación en todo momento
+- Es aplicable a otras tecnologias como Angular, Vue, Flutter, es una forma de mantener el estado
+- Ruta de la información: State > View > Actions > Dispatcher(puede o no entrar a algun Middleware) > Reducers > Updated State
+- Para peticiones Asincronas dentro del Dispatcher tenemos los Middlewares 
+
+### Redux Thunk
+Comando instalacion ```npm i --save redux-thunk```
+- Sirve para gestionar el middleware de Redux
+## Custom Snippet
+1. CTRL + P
+2. Buscamos ```>Preferences: Configure User Snippets```
+3. Seleccionar lenguaje o tecnologia
+4. Editamos el archivo JSON con código de la siguiente manera 
+```
+"Tecnologia-ejemplo elementoEjemplo":{
+	"prefix": "elementoEjemplo",
+	"body": ["cuerpo de lo que se carga al usar el snippet"],
+	"description": "Descripcion del snippet"
+}
 ```
