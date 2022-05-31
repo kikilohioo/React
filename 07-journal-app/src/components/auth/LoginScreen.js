@@ -1,32 +1,59 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import validator from 'validator'
 import { useForm } from '../../hooks/useForm';
 import { startGoogleLogin, startLoginEmailPassword } from '../../actions/auth';
+import { removeError, setError } from '../../actions/ui';
 
 export const LoginScreen = () => {
 	const dispatch = useDispatch();
+	const { msgError, loading } = useSelector(state => state.ui);
 
 	const [formValues, handleInputChange] = useForm({
-		email: 'name@mail.com',
-		password: '123456'
+		email: 'caiqui@mail.com',
+		password: '12345678'
 	});
 
 	const { email, password } = formValues;
 
 	const handleLogin = (e) => {
 		e.preventDefault();
-		dispatch(startLoginEmailPassword(email,password));
+		if (isFormValid()) {
+			dispatch(startLoginEmailPassword(email, password));
+		}
 	}
 	
+	const isFormValid = () => {
+		if (!validator.isEmail(email)) {
+			dispatch(setError('El correo electrónico no es valido'))
+			return false;
+		} else if (password.length < 8) {
+			dispatch(setError('La contraseña debe tener al menos 8 caracteres'))
+			return false;
+		}
+		dispatch(removeError())
+		return true;
+	}
+
 	const handleGoogleLogin = () => {
 		dispatch(startGoogleLogin());
+	}
+
+	const resetError = () => {
+		dispatch(removeError())
 	}
 
 	return (
 		<div>
 			<h3 className='auth__title mb-5'>Login</h3>
 			<form onSubmit={handleLogin}>
+				{
+					msgError &&
+					<div className='auth__alert-error'>
+						{msgError}
+					</div>
+				}
 				<input
 					type="text"
 					placeholder='Email'
@@ -47,6 +74,7 @@ export const LoginScreen = () => {
 				<button
 					type='submit'
 					className='btn btn-primary'
+					disabled={loading}
 				>Login</button>
 				<hr />
 				<div className='auth__social-networks'>
@@ -60,7 +88,7 @@ export const LoginScreen = () => {
 						</p>
 					</div>
 				</div>
-				<Link className='link' to='/auth/register'>Create new account</Link>
+				<Link className='link' to='/auth/register' onClick={resetError}>Create new account</Link>
 			</form>
 		</div>
 	)

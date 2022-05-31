@@ -1,27 +1,39 @@
 import React from 'react'
+import moment from 'moment';
+import { activeNote } from '../../actions/notes';
+import { useDispatch } from 'react-redux';
 
-export const JournalEntry = () => {
+export const JournalEntry = ({ note }) => {
+	const { id, date, title, body, url } = note;
+	const dispatch = useDispatch();
+	const noteDate = moment(date);
+
+	const handleEntryClick = (id, note) => {
+		dispatch(activeNote(id, note))
+	}
+
 	return (
-		<div className='journal__entry'>
-			<div
-				className='journal__entry-picture'
-				style={{
+		<div className='journal__entry' onClick={() => handleEntryClick(id, note)}>
+			{
+				url &&
+				<div
+					className='journal__entry-picture'
+					style={{
 					backgroundSize: 'cover',
-					backgroundImage: 'url(https://images.all-free-download.com/images/graphicwebp/vertical_view_of_the_falls_at_gooseberry_falls_state_park_minnesota_590983.webp)'
+					backgroundImage: `url(${url})`
 				}}
-			></div>
+				></div>}
 			<div className='journal__entry-body'>
 				<p className='journal__entry-title'>
-					Un nuevo dia
+					{title}
 				</p>
 				<p className='journal__entry-content'>
-					Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt quidem sint voluptate, ad quisquam
-					eveniet rem quasi ipsum dolorum cum autem quas laboriosam velit officia. Accusantium impedit assumenda ut exercitationem.
+					{body}
 				</p>
 			</div>
 			<div className='journal__entry-date-box'>
-				<span>Monday</span>
-				<h4>28</h4>
+				<span>{noteDate.format('dddd')}</span>
+				<h4>{noteDate.format('Do')}</h4>
 			</div>
 		</div>
 	)

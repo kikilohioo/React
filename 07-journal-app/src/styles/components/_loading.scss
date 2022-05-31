@@ -1,0 +1,14 @@
+.loading__main{
+	display: flex;
+	justify-content:center;
+	align-items: center;
+	background-color: $white;
+	color: lighten($color: $dark-grey, $amount: 30);
+	margin: 0px;
+	height: 100vh;
+	width: 100vw;
+}
+
+.loading__main img{
+	margin-right: 20px;
+}

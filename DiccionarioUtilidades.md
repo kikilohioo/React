@@ -47,6 +47,51 @@ Comando instalacion ```npm i react-redux redux```
 - Ruta de la información: State > View > Actions > Dispatcher(puede o no entrar a algun Middleware) > Reducers > Updated State
 - Para peticiones Asincronas dentro del Dispatcher tenemos los Middlewares 
 
+## Iniciar Redux
+###### Crear store.js
+Recordar importar ```Redux Thunk```
+```
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk'
+import { authReducer } from '../reducers/authReducer';
+import { uiReducer } from '../reducers/uiReducer';
+
+const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+
+const reducers = combineReducers({
+	auth: authReducer,
+	ui: uiReducer
+})
+
+export const store = createStore(
+	reducers,
+	composeEnhancers(
+		applyMiddleware(thunk)
+	)
+);
+```
+###### Importar 
+```
+import { Provider } from 'react-redux'
+import { store } from './store/store'
+```
+###### Componente inicial 
+```
+<Provider store={store}>
+	<AppRouter />
+</Provider>
+```
+
+- ### useSelector
+	Es para traer cosas del store
+	```
+	const state = useSelector(state => state);
+	```
+- ### useDispatch
+	Enviar acciones a redux para que se envien al reducer correspondiente
+	```
+	const dispatch = useDispatch();
+	```
 ### Redux Thunk
 Comando instalacion ```npm i --save redux-thunk```
 - Sirve para gestionar el middleware de Redux
