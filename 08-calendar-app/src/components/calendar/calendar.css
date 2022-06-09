@@ -1,0 +1,23 @@
+.fc-daygrid-event{
+	cursor: pointer;
+}
+
+.fc-scrollgrid-sync-inner{
+	padding: 10px;
+}
+
+.fc-col-header-cell{
+	background-color: #212529;
+}
+
+.fc-col-header-cell .fc-scrollgrid-sync-inner a{
+	color: white;
+}
+
+.fc-scrollgrid-sync-inner a{
+	text-decoration: none;
+}
+
+.fc-daygrid-day{
+	cursor: cell
+}
