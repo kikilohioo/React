@@ -8,10 +8,30 @@
 
 #### useEffect
 - Se recomienda usar un 'useEffect' por cada cosa que quieramos saber si cambia o no
+Por ejemplo si tienes un valor que si cambia precisas desencadenar otros cambios, ahi deberias de usarlo.
+
+```
+import { useEffect } from 'react'
+
+useEffect(() => {
+  Codigo del efecto a desencadenar va aqui
+
+  return () => {
+	aqui puedes incluir un callback en caso de ser necesario
+  }
+}, [aqui van las dependencias que funcionaran de triggers])
+```
 
 #### useState
 - Siempre revisar si es necesario desestrucutar un state para acceder de forma más sencilla a los atributos
 - Cuando vamos a setear los valores de los hooks(useState) tambien hay que desestructurar si es necesario
+
+```
+import { useState } from 'react'
+
+const [stateValue, setStateValue] = useState(initialState)
+
+```
 
 #### useCallback
 - Se usa para enviar funciones a componentes en los que utilizamos memo
@@ -23,9 +43,50 @@ Comando Instalacion ```npm install --save reducer```
 - Se usa de forma similar al useState pero es conveniente para casos más complejos
 - Separa la logica en acciones enviadas a traves del dispatch, resuelve todo dentro de la funcion y siempre retorna solo un estado
 
+```
+import { useReducer } from 'react'
+
+const [items, dispatch] = useReducer(itemsReducer, [], init) //El hook recibe el reducer, valor inicial y opcionalmente podemos con init tener una inicialización diferida por medio de una función
+
+const itemsReducer = (state = [], action) => {
+	switch (action.type) {
+		case 'x':
+			return [...state, action.payload];
+
+			...
+
+		default:
+			return state;
+	}
+}
+```
+
 #### useContext
 - Se usa para reunir varios componentes y proveerles una forma directa de acceso a la información de un padre
 - Todos los componentes en los que se quiera usar el useContext deben estar dentro del componente del context
+
+```
+import { useContext } from 'react'
+
+const ValueContext = React.createContext(initialValue); //Creamos el Context
+
+function App() {
+  return (
+    <ValueContext.Provider value={values}> //Englobamos la app en el Context.Provider
+      <Toolbar />
+    </ValueContext.Provider>
+  );
+}
+
+```
+En el resto de hijos que se desee usar el context deberemos de hace lo siguiente
+
+```
+import { useContext } from 'react'
+
+const value = useContext(ValueContext);
+
+```
 
 #### useMemo
 - Se usa para memorizar algo y desencadenar una función si una dependencia cambia
