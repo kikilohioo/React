@@ -110,7 +110,7 @@ Comando instalacion ```npm i react-redux redux```
 
 ## Iniciar Redux
 ###### Crear store.js
-Recordar importar ```Redux Thunk```
+Recordar importar ```Redux Thunk``` o usar el middleware por defecto de ```redux-toolkit ```
 ```
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk'
