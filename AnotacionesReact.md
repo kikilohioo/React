@@ -110,7 +110,8 @@ Comando instalacion ```npm i react-redux redux```
 
 ## Iniciar Redux
 ###### Crear store.js
-Recordar importar ```Redux Thunk``` o usar el middleware por defecto de ```redux-toolkit ```
+Recordar importar ```Redux Thunk``` o usar los 'Slices' de ```redux-toolkit ```
+##### Redux Thunk
 ```
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk'
@@ -131,18 +132,19 @@ export const store = createStore(
 	)
 );
 ```
-###### Importar 
+Y luego lo usas en los archivos de la siguiente forma
 ```
+/* En el archivo 'raiz' o en el que tenga que englobar el store */
+
 import { Provider } from 'react-redux'
 import { store } from './store/store'
-```
-###### Componente inicial 
-```
+
 <Provider store={store}>
 	<AppRouter />
 </Provider>
-```
 
+```
+En el resto de archivos deberas de usar los hooks useSelector y useDispatch
 - ### useSelector
 	Es para traer cosas del store
 	```
@@ -153,6 +155,38 @@ import { store } from './store/store'
 	```
 	const dispatch = useDispatch();
 	```
+##### Redux Toolkit Slice
+```
+import { createSlice } from '@reduxjs/toolkit';
+
+export const templateSlice = createSlice({
+    name: 'template',
+    initialState: {
+        counter: 10
+    },
+    reducers: {
+        action1: (state,/*action*/) => {
+            /* state modification */
+        },
+	action2: () =>{
+		...
+	}
+    }
+});
+
+export const { action1, action2... } = templateSlice.actions;
+```
+Y luego lo usas en los archivos de la siguiente forma
+
+```
+const storeState = useSelector( state => state)
+const dispatch = useDispatch();
+
+const handleAction = (/*any*/) =>{
+	dispatch(onEditedEvent(/*any*/))
+}
+```
+
 ### Redux Thunk
 Comando instalacion ```npm i --save redux-thunk```
 - Sirve para gestionar el middleware de Redux
