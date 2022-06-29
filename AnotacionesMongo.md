@@ -60,7 +60,7 @@ const ModelXSchema = Schema({
 module.exports = model('ModelX', ModelXSchema);
 ```
 ### Middlewares
-Son algortmos intermedios que se utilizan para separar una logica que precisamos controlar de manera separada y más controlada, en este caso el ejemplo es para validar campos de un formulario de registro e inicio de sesion
+Son algoritmos intermedios que se utilizan para separar una logica que precisamos controlar de manera separada y más controlada, en este caso el ejemplo es para validar campos de un formulario de registro e inicio de sesion
 
 Crear archivo ```middlewares/validar-campos.js```
 ```

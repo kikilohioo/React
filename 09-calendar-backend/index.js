@@ -14,9 +14,11 @@ app.use(express.static('public'))
 /* Lectura y parseo */
 app.use(express.json())
 
-/* Rutas */
+/* Rutas Auth */
 app.use('/api/auth', require('./routes/auth'))
 
+/* Rutas Events */
+app.use('/api/events', require('./routes/events'))
 
 app.listen(process.env.PORT, () => {
 	console.log(`Servidor corriendo en puerto ${process.env.PORT}`)
