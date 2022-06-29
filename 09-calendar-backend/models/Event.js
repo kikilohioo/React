@@ -5,13 +5,20 @@ const EventSchema = Schema({
 		type: String,
 		require: true
 	},
-	body: {
-		type: String,
-		require: true
+	notes: {
+		type: String
 	},
-	date: {
+	start: {
 		type: Date,
 		require: true
+	},
+	end: {
+		type: Date,
+		require: true
+	},
+	user: {
+		type: Schema.Types.ObjectId,
+		ref: 'User'
 	}
 });
 

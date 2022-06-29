@@ -4,7 +4,6 @@ var cors = require('cors')
 const { dbConnection } = require('./db/config')
 /* Creando el servidor */
 const app = express();
-const port = 3100;
 
 /* Base de datos */
 dbConnection();
