@@ -57,10 +57,10 @@ const loginUser = async (req, res = response) => {
 				msg: 'Email o contraseña invalidas'
 			})
 		}
-		
+
 		//Confirmar constraseña
 		const validPassword = bcrypt.compareSync(password, user.password)
-		
+
 		if (!validPassword) {
 			return res.status(400).json({
 				ok: false,
@@ -69,7 +69,7 @@ const loginUser = async (req, res = response) => {
 		}
 
 		//Generar el JWT
-		const token = await generateJWT(user.id,user.name)
+		const token = await generateJWT(user.id, user.name)
 
 		res.status(200).json({
 			ok: true,
@@ -88,10 +88,15 @@ const loginUser = async (req, res = response) => {
 
 };
 
-const renewUserToken = (req, res = response) => {
+const renewUserToken = async (req, res = response) => {
+	const { uid, name } = req;
+
+	//Generar el JWT
+	const token = await generateJWT(uid, name)
+
 	res.json({
 		ok: true,
-		msg: 'renew'
+		token
 	})
 };
 
