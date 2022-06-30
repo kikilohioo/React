@@ -63,3 +63,76 @@ app.listen(process.env.PORT, () => {
     env.js
     package.json
 ```
+### Models
+Son los archivos que deberemos de generar en ```./models/...``` y se encargan de darle forma a las entidades de la base de datos, por más información entre al archivo ```./AnotacionesMongo.md```
+### Controllers
+Son los archivos que deberemos de generar en ```./controllers/...``` y se encargan a traves de funciones(metodos) de realizar la logica de interación con la base de datos, asi como tambien algunas validaciones y la gestion de las respuestas(con sus status), por más información entre al archivo ```./AnotacionesMongo.md```
+### Middlewares
+Son algoritmos intermedios que se utilizan para separar una logica que precisamos controlar de manera separada y más controlada, en este caso el ejemplo es para validar campos de un formulario de registro e inicio de sesion
+
+Crear archivo ```middlewares/validar-campos.js```
+```
+const { response } = require('express')
+const { validationResult } = require('express-validator');
+
+const validarCampos = (req, res = response, next) => {
+	const errors = validationResult(req)
+
+	if (!errors.isEmpty()) {
+		return res.status(400).json({
+			pk: false,
+			errors: errors.mapped()
+		})
+	}
+
+	next();
+}
+
+module.exports = {
+	validarCampos
+}
+```
+Una vez creado el middleware como tal, deberemos de importarlo donde lo usaremos, en este caso será en nuestros Routers en ```./routes/...```
+### Routers
+Son los encargados de redirigir las solicitudes a los controladores correspondientes permitiendote pasar en un paso intermedio por los middlewares para realizar diversas acciones como validar campos, tokens, entre otros.
+Deberemos de crear un archivo segun a que corresponda el enrrutamiento ```./routes/routesx.js``` e incluiremos ese Router en ```index.js``` de la siguiente forma.
+```
+/* Rutas X */
+app.use('/api/X', require('./routes/routesx'))
+
+/* Rutas Z */
+app.use('/api/Z', require('./routes/routesZ'))
+
+...
+```
+Luego modificaremos el Router y agregaremos lo siguiente
+```
+/* 
+	Rutas de usuarios 
+	host + /api/auth
+*/
+
+const { Router } = require('express');
+const { check } = require('express-validator');
+const { /* metodos controlador */ } = require('../controllers/auth');
+const { validateX } = require('../middlewares/validate-x');
+const router = Router();
+
+router.get('/* ruta */', /* middlewares */, /* metodo del controlador */);
+
+/* las solicitudes pueden ser get, post, put o delete */
+
+EJ:
+router.post(
+	'/new',
+	[
+		check('name', 'El nombre es oblighatorio').notEmpty(),
+		check('email', 'El email debe ser valido').isEmail(),
+		check('password', 'El password debe ser de 6 caracteres como minimo').isLength({ min: 6 }),
+		validateCampos
+	],
+	createUser
+);
+
+module.exports = router;
+```

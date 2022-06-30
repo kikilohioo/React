@@ -31,7 +31,7 @@ const modelo = require('../models/Model');
 const metodoX = async (req, res = response) => {/* codigo */}
 ...
 ```
-Aqui se gestionan las respuestas, para indicar correctamente los status revisar https://www.restapitutorial.com/httpstatuscodes.html
+Aqui se gestionan las interacciones con la DB y las respuestas. Para indicar correctamente los status revisar https://www.restapitutorial.com/httpstatuscodes.html
 Al final del archivo recordar incluir las exportaciones
 ```
 module.exports = {
@@ -41,7 +41,7 @@ module.exports = {
 };
 ```
 ### Models
-Crear archivos ```models/Modelname.js``` e incluir
+Crear archivos ```models/Modelname.js``` e incluir lo siguiente. Esto es parte de la sintaxis de Mongoose
 ```
 const { Schema, model } = require('mongoose');
 
@@ -59,29 +59,3 @@ const ModelXSchema = Schema({
 
 module.exports = model('ModelX', ModelXSchema);
 ```
-### Middlewares
-Son algoritmos intermedios que se utilizan para separar una logica que precisamos controlar de manera separada y más controlada, en este caso el ejemplo es para validar campos de un formulario de registro e inicio de sesion
-
-Crear archivo ```middlewares/validar-campos.js```
-```
-const { response } = require('express')
-const { validationResult } = require('express-validator');
-
-const validarCampos = (req, res = response, next) => {
-	const errors = validationResult(req)
-
-	if (!errors.isEmpty()) {
-		return res.status(400).json({
-			pk: false,
-			errors: errors.mapped()
-		})
-	}
-
-	next();
-}
-
-module.exports = {
-	validarCampos
-}
-```
-Una vez creado el middleware como tal, deberemos de importarlo donde lo usaremos, en este caso será en 
