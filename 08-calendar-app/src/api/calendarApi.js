@@ -1,10 +1,7 @@
 import axios from 'axios';
-import { getEnvVariables } from '../helpers/getEnvVariables'
-
-const { API_URL, PROD_API_URL } = getEnvVariables()
 
 const caledarApi = axios.create({
-	baseURL: PROD_API_URL
+	baseURL: 'https://caiqui-calendar-app.herokuapp.com/api'
 });
 
 caledarApi.interceptors.request.use(config => {
