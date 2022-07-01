@@ -15,19 +15,17 @@ router.use(validateJWT) // middleware para todas las rutas al mismo tiempo
 
 router.get('/', getEvents);
 
-router.post(
-	'/',
+router.post('/',
 	[
 		check('title', 'El titulo es obligatorio').notEmpty(), //Esto genera los mensajes de error, para devolverlos debemos importar el middleware validate-campos en este caso
 		check('start', 'Fecha de inicio es obligatoria').custom(isDate),
-		check('start', 'Fecha de finalizacion es obligatoria').custom(isDate),
+		check('end', 'Fecha de finalizacion es obligatoria').custom(isDate),
 		validateCampos
 	],
 	createEvent
 );
 
-router.put(
-	'/:id',
+router.put('/:id',
 	[
 		check('title', 'El titulo es obligatorio').notEmpty(), //Esto genera los mensajes de error, para devolverlos debemos importar el middleware validate-campos en este caso
 		check('start', 'Fecha de inicio es obligatoria').custom(isDate),

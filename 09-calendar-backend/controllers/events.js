@@ -2,8 +2,12 @@ const { response } = require("express");
 const Event = require('../models/Event');
 
 const getEvents = async (req, res = response) => {
-	const events = await Event.find().populate('user','name');
-
+	const events = await Event.find({
+		user: {
+			_id: req.uid
+		}
+	}).populate('user', 'name');
+	
 	res.status(200).json({
 		ok: true,
 		events
@@ -57,7 +61,7 @@ const updateEvent = async (req, res = response) => {
 			user: uid
 		}
 
-		const eventUpdated = await Event.findByIdAndUpdate(eventId, eventAux, {new: true})
+		const eventUpdated = await Event.findByIdAndUpdate(eventId, eventAux, { new: true })
 
 		res.status(200).json({
 			ok: true,

@@ -25,7 +25,7 @@ const EventSchema = Schema({
 
 /* Aqui sobreescribimos como queremos que se comporte el serializador toJSON que ya está usando Mongoose */
 EventSchema.method('toJSON', function () {
-	const { __v, _id, ...object } = this.toObject();
+	const { __v, _id,  ...object } = this.toObject();
 	object.id = _id;
 	return object;
 })

@@ -12,8 +12,7 @@ const router = Router();
 
 router.get('/renew', validateJWT, renewUserToken);
 
-router.post(
-	'/new',
+router.post('/new',
 	[
 		check('name', 'El nombre es oblighatorio').notEmpty(),
 		check('email', 'El email debe ser valido').isEmail(),
@@ -23,8 +22,7 @@ router.post(
 	createUser
 );
 	
-router.post(
-	'/',
+router.post('/',
 	[
 		check('email', 'El email debe ser valido').isEmail(),
 		check('password', 'El password debe ser de 6 caracteres como minimo').isLength({ min: 6 }),
