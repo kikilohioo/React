@@ -23,6 +23,14 @@ app.use('/api/auth', require('./routes/auth'))
 /* Rutas Events */
 app.use('/api/events', require('./routes/events'))
 
+/*
+Para despliegue de front-end mismo en ./public/ deberemos agregar el siguiente codigo
+
+app.get('*', (req,res)=>{
+	res.sendFile(__dirname + '/public/index.html')
+})
+*/
+
 app.listen(process.env.PORT, () => {
 	console.log(`Servidor corriendo en puerto ${process.env.PORT}`)
 })
