@@ -1,7 +1,8 @@
-import {API_URL} from "../env";
+import {API_URL, PROD_API_URL} from "../env";
 
 export const getEnvVariables = () => {
 	return {
-		API_URL
+		API_URL,
+		PROD_API_URL
 	}
 }
