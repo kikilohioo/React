@@ -202,3 +202,8 @@ Comando instalacion ```npm i --save redux-thunk```
 	"description": "Descripcion del snippet"
 }
 ```
+
+## Cosas para investigar
+- React Query para llamados comunes a APIs
+- Profundizar en Redux y gestion de estado
+- Ojear Vue y Angular
